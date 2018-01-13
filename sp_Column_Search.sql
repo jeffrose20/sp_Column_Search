@@ -1,8 +1,14 @@
---[dbo].[sp_Column_Search] 'error', 1
 
-ALTER PROCEDURE [dbo].[sp_Column_Search]
+USE AdventureWorks2012
+GO
+
+IF EXISTS(SELECT * FROM sys.procedures WHERE name = 'sp_Column_Search')
+	DROP PROCEDURE [dbo].[sp_Column_Search]
+GO
+
+CREATE PROCEDURE [dbo].[sp_Column_Search]
 (
-	@ColumnString NVARCHAR(128),
+	@ColumnString NVARCHAR(128),		--String that will be searched for within existing column names using regex
 	@GlobalSearch BIT = 0				--Value of 1 and this query will search all DBs on the server
 )
 AS
